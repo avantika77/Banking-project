@@ -11,13 +11,15 @@ public class Banking {
 class BankAccount {
     int balance; // money in bank
     int previousTransaction; // previous amount withdraw
-    String customerName;
-    String customerId;
+    String clientName; // Changed variable name from customerName to clientName
+    String clientID; // Changed variable name from customerId to clientID
+    double interestRate; // New property for interest rate
 
     BankAccount(String cname, String cid) // customer name ,id
     {
-        customerName = cname;
-        customerId = cid;
+        clientName = cname; // Changed variable name from customerName to clientName
+        clientID = cid; // Changed variable name from customerId to clientID
+        interestRate = 0.05; // Default interest rate (5%)
     }
 
     void deposit(int amount) {
@@ -45,31 +47,59 @@ class BankAccount {
         }
     }
 
+    // Calculate interest earned
+    double calculateInterest() {
+        return balance * interestRate;
+    }
+
+    // Method to change client details
+    void changeClientDetails(String newName) {
+        clientName = newName; // Changed method name from changeCustomerDetails to changeClientDetails
+        System.out.println("Client details updated successfully!"); // Changed message from "Customer details updated successfully!" to "Client details updated successfully!"
+    }
+
+    // Method to update client ID
+    void updateClientID(String newID) {
+        clientID = newID;
+        System.out.println("Client ID updated successfully!");
+    }
+
+    // Method to get client details
+    String getClientDetails() {
+        return "Client Name: " + clientName + "\nClient ID: " + clientID; // Changed message from "Customer Name" to "Client Name"
+    }
+
     void showMenu() {
         char option = '\0';
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome " + customerName);
-        System.out.println("Your ID is " + customerId);
+        System.out.println("Welcome " + clientName); // Changed variable name from customerName to clientName
+        System.out.println("Your ID is " + clientID); // Changed variable name from customerId to clientID
         System.out.println("\n");
         System.out.println("A. Check Balance");
         System.out.println("B. Deposit");
         System.out.println("C. Withdraw");
         System.out.println("D. Previous Transaction");
-        System.out.println("E. Exit");
+        System.out.println("E. Calculate Interest"); // New option
+        System.out.println("F. Change Client Name"); // Changed message from "Change Customer Details" to "Change Client Details"
+       System.out.println("G. Update Client ID");
+        System.out.println("H. Get Client Details"); // Changed message from "Get Customer Details" to "Get Client Details"
+         // New option
+        System.out.println("I. Exit");
 
         do {
             System.out.println("=====================================================");
             System.out.println("Enter an Option");
             System.out.println("=====================================================");
             option = scanner.next().charAt(0);
-            System.out.println("\n");
+           // System.out.println("\n");
 
+            
             switch (option) {
                 case 'A':
                     System.out.println("----------------------------");
                     System.out.println("Balance = " + balance);
                     System.out.println("----------------------------");
-                    System.out.println("\n");
+                    //System.out.println("\n");
                     break;
 
                 case 'B':
@@ -78,7 +108,7 @@ class BankAccount {
                     System.out.println("----------------------------");
                     int amount = scanner.nextInt();
                     deposit(amount);
-                    System.out.println("\n");
+                    //System.out.println("\n");
                     break;
 
                 case 'C':
@@ -87,17 +117,49 @@ class BankAccount {
                     System.out.println("----------------------------");
                     int amount2 = scanner.nextInt();
                     withdraw(amount2);
-                    System.out.println("\n");
+                    //System.out.println("\n");
                     break;
 
                 case 'D':
                     System.out.println("----------------------------");
                     getPreviousTransaction();
                     System.out.println("----------------------------");
-                    System.out.println("\n");
+                   // System.out.println("\n");
                     break;
 
                 case 'E':
+                    System.out.println("----------------------------");
+                    System.out.println("Interest earned: " + calculateInterest());
+                    System.out.println("----------------------------");
+                   // System.out.println("\n");
+                    break;
+
+                case 'F':
+                    System.out.println("----------------------------");
+                    System.out.println("Enter new client name:");
+                    System.out.println("----------------------------");
+                    String newName = scanner.next();
+                    changeClientDetails(newName); // Changed method name from changeCustomerDetails to changeClientDetails
+                    //System.out.println("\n");
+                    break;
+case 'G':
+                    System.out.println("----------------------------");
+                    System.out.println("Enter new client ID:");
+                    System.out.println("----------------------------");
+                    String newID = scanner.next();
+                    updateClientID(newID); // New method to update client ID
+                    //System.out.println("\n");
+                    break;
+                case 'H':
+                    System.out.println("----------------------------");
+                    System.out.println(getClientDetails()); // Changed method name from getCustomerDetails to getClientDetails
+                    System.out.println("----------------------------");
+                    //System.out.println("\n");
+                    break;
+
+                
+
+                case 'I':
                     System.out.println("**************************************************");
                     break;
 
@@ -106,7 +168,7 @@ class BankAccount {
                     break;
             }
 
-        } while (option != 'E');
+        } while (option != 'I');
 
         System.out.println("Thank you for using our service");
     }
