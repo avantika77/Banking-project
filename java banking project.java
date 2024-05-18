@@ -1,6 +1,6 @@
-import java.util.Scanner;
+import java.util.Scanner;      // java.util package  
 
-public class Banking {
+public class Banking { 
 
     public static void main(String[] args) {
         BankAccount bankAccount = new BankAccount("AVANTIKA", "S88780");
@@ -9,21 +9,21 @@ public class Banking {
 }
 
 class BankAccount {
-    int balance; // money in bank
-    int previousTransaction; // previous amount withdrawn or deposited
+    int balance;  // money in bank
+    int previousTransaction; // previous amount withdrawn 
     int totalDeposits; // total deposits made
     int totalWithdrawals; // total withdrawals made
-    String clientName;  
-    String accountNumber; 
-    double interestRate; 
+    String clientName;  // client name
+    String accountNumber; // client account number
+    double interestRate; // interest here,5%
 
-    BankAccount(String cname, String accNum) {
+    BankAccount(String cname, String accNum) {  
         clientName = cname; 
-        accountNumber = accNum; 
+        accountNumber = accNum; // account number
         interestRate = 0.05; // Default interest rate (5%)
     }
 
-    void deposit(int amount) {
+    void deposit(int amount) {     // deposit method
         if (amount != 0) {
             balance += amount;
             previousTransaction = amount;
@@ -31,15 +31,15 @@ class BankAccount {
         }
     }
 
-    void withdraw(int amount) {
+    void withdraw(int amount) {     // withdraw method
         if (amount != 0) {
-            balance -= amount; // decrement amount
+            balance -= amount; // decrement amount from balance
             previousTransaction = -amount;
             totalWithdrawals += amount;
         }
     }
 
-    void getPreviousTransaction() {
+    void getPreviousTransaction() {        //getPreviousTransaction method
         if (previousTransaction > 0) {
             System.out.println("Deposited: " + previousTransaction);
         } else if (previousTransaction < 0) {
@@ -49,11 +49,11 @@ class BankAccount {
         }
     }
 
-    double calculateInterest() {
+    double calculateInterest() {     // interset method
         return balance * interestRate;
     }
 
-    void changeClientDetails(String newName) {
+    void changeClientDetails(String newName) {           // change client name
         clientName = newName; 
         System.out.println("Client details updated successfully!"); 
     }
